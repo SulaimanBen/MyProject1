@@ -1,31 +1,29 @@
-package user;
+package windows_gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import client.User;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Window;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Login {
 
 	JFrame frame;
 	private JPanel contentPane;
-	private JTextField textField;
+//	private JTextField textField;
 	private JTextField usernametextField;
 	private JPasswordField passwordTextField;
 
@@ -83,6 +81,18 @@ public class Login {
 		contentPane.add(lblPassword);
 		
 		JButton btnlogin = new JButton("Login");
+		btnlogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				for (User element : SignUp.user) {
+					if(SignUp.user.contains(element.getUserName())) {
+						System.out.println("hjgasdkjdhas");
+					}else {
+						System.out.println("false");
+					}
+				}
+			}
+		});
 		btnlogin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnlogin.setBounds(247, 312, 117, 43);
 		contentPane.add(btnlogin);
@@ -137,3 +147,4 @@ public class Login {
 		frame.setUndecorated(true);
 	}
 }
+

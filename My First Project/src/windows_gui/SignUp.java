@@ -1,10 +1,15 @@
-package user;
+package windows_gui;
 
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.User;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -12,19 +17,23 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUp {
 
 	protected JFrame frame;
 	private JPanel contentPane; 
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField firstnameTextField;
+	private JTextField lastnameTextField;
+	private JTextField usernameTextField;
+	private JTextField emailTextField;
+	private JTextField ibanTextField;
+	private JTextField bicTextField;
+	private JPasswordField passwordTextField;
+	private JPasswordField confirmPasswordTextField;
+	
+	protected static List<User> user = new ArrayList<>();
 
 
 	/**
@@ -60,24 +69,24 @@ public class SignUp {
 		lblNewLabel.setBounds(89, 134, 107, 33);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(296, 138, 194, 33);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		firstnameTextField = new JTextField();
+		firstnameTextField.setBounds(296, 138, 194, 33);
+		contentPane.add(firstnameTextField);
+		firstnameTextField.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last name:");
 		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblLastName.setBounds(89, 177, 107, 33);
 		contentPane.add(lblLastName);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(296, 177, 194, 33);
-		contentPane.add(textField_1);
+		lastnameTextField = new JTextField();
+		lastnameTextField.setColumns(10);
+		lastnameTextField.setBounds(296, 177, 194, 33);
+		contentPane.add(lastnameTextField);
 		
-		JLabel lblEmail = new JLabel("Email:");
+		JLabel lblEmail = new JLabel("Email:(Optional)");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEmail.setBounds(89, 285, 107, 33);
+		lblEmail.setBounds(89, 285, 155, 33);
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password:");
@@ -100,40 +109,68 @@ public class SignUp {
 		lblBic.setBounds(89, 502, 107, 33);
 		contentPane.add(lblBic);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(296, 220, 194, 33);
-		contentPane.add(textField_2);
+		usernameTextField = new JTextField();
+		usernameTextField.setColumns(10);
+		usernameTextField.setBounds(296, 220, 194, 33);
+		contentPane.add(usernameTextField);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblUsername.setBounds(89, 220, 107, 33);
 		contentPane.add(lblUsername);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(296, 285, 194, 33);
-		contentPane.add(textField_3);
+		emailTextField = new JTextField();
+		emailTextField.setColumns(10);
+		emailTextField.setBounds(296, 285, 194, 33);
+		contentPane.add(emailTextField);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(296, 460, 194, 33);
-		contentPane.add(textField_4);
+		ibanTextField = new JTextField();
+		ibanTextField.setColumns(10);
+		ibanTextField.setBounds(296, 460, 194, 33);
+		contentPane.add(ibanTextField);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(296, 502, 194, 33);
-		contentPane.add(textField_5);
+		bicTextField = new JTextField();
+		bicTextField.setColumns(10);
+		bicTextField.setBounds(296, 502, 194, 33);
+		contentPane.add(bicTextField);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(296, 343, 194, 33);
-		contentPane.add(passwordField);
+		passwordTextField = new JPasswordField();
+		passwordTextField.setBounds(296, 343, 194, 33);
+		contentPane.add(passwordTextField);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(296, 386, 194, 33);
-		contentPane.add(passwordField_1);
+		confirmPasswordTextField = new JPasswordField();
+		confirmPasswordTextField.setToolTipText("");
+		confirmPasswordTextField.setBounds(296, 386, 194, 33);
+		contentPane.add(confirmPasswordTextField);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!(firstnameTextField.getText().isEmpty())
+					&& !(lastnameTextField.getText().isEmpty())
+					&& !(usernameTextField.getText().isEmpty())
+					&& !(passwordTextField.getText().isEmpty())
+					&& !(confirmPasswordTextField.getText().isEmpty())
+					&&!(ibanTextField.getText().isEmpty())
+					&& !(bicTextField.getText().isEmpty())) {
+					
+					user.add(new User(firstnameTextField.getText(),
+							lastnameTextField.getText(),
+							ibanTextField.getText(),
+							bicTextField.getText(),
+							passwordTextField.getText(),
+							usernameTextField.getText()));
+					
+					JOptionPane.showMessageDialog(null, "Registration Succeed !");
+					new Login().frame.setVisible(true);
+					frame.setVisible(false);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Please fill in all Fields!");
+				}
+			}
+		});
 		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnRegister.setBounds(125, 578, 119, 33);
 		contentPane.add(btnRegister);
@@ -153,3 +190,4 @@ public class SignUp {
 	}
 
 }
+
