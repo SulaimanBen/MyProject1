@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -85,10 +87,17 @@ public class Login {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				for (User element : SignUp.user) {
-					if(SignUp.user.contains(element.getUserName())) {
-						System.out.println("hjgasdkjdhas");
+					if (element.getUserName().contentEquals(usernametextField.getText()) 
+							&& element.getPassword().contentEquals(passwordTextField.getText())) {
+						WelcomeWindow w = new WelcomeWindow();
+						Operation op = new Operation();
+						w.frame.setVisible(true);
+						w.lblwelcomeUsername.setText(element.getUserName());
+						op.lblBalance.setText(""+element.getBalance());
+						frame.setVisible(false);
+						break;
 					}else {
-						System.out.println("false");
+						JOptionPane.showMessageDialog(null, "Wrong Username or Password!\n Please try again..");;
 					}
 				}
 			}

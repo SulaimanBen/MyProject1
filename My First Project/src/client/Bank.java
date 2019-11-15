@@ -4,8 +4,8 @@ public class Bank {
 	
 	private String bankName;
 	private int id;
-	private User[] user = {new User("Max", "", "DE12515140", "CODEXXXXX"),
-						new User("Tom", "", "DE14788963", "CODEXXXXX")	};
+	public static User[] user = {new User("Max", "", "DE12515140", "CODEXXXXX" , 50000),
+						new User("Tom", "", "DE14788963", "CODEXXXXX", 1000000)	};
 	
 	public String getBankName() {
 		return bankName;
@@ -23,18 +23,10 @@ public class Bank {
 		this.id = id;
 	}
 
-	public User[] getUser() {
-		return user;
-	}
-
-	public void setUser(User[] user) {
-		this.user = user;
-	}
-
 	public Bank(String bankName, int id,User[] user) {
 		this.bankName = bankName;
 		this.id = id;
-		this.user = user;
+		Bank.user = user;
 	}
 	
 

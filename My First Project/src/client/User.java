@@ -8,12 +8,14 @@ public class User {
 				   bic,
 				   password,
 				   userName;
+	private double balance;
 	
-	public User (String firstName, String lastName, String iBan, String bic) {
+	public User (String firstName, String lastName, String iBan, String bic , double balance) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.iBan = iBan;
 		this.bic = bic;
+		this.setBalance(balance);
 	}
 
 	public String getFirstName() {
@@ -71,6 +73,14 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 	
 }

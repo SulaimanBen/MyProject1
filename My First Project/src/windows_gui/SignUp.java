@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.Bank;
 import client.User;
 
 import javax.swing.JLabel;
@@ -147,26 +148,27 @@ public class SignUp {
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (!(firstnameTextField.getText().isEmpty())
-					&& !(lastnameTextField.getText().isEmpty())
-					&& !(usernameTextField.getText().isEmpty())
-					&& !(passwordTextField.getText().isEmpty())
-					&& !(confirmPasswordTextField.getText().isEmpty())
-					&&!(ibanTextField.getText().isEmpty())
-					&& !(bicTextField.getText().isEmpty())) {
-					
-					user.add(new User(firstnameTextField.getText(),
-							lastnameTextField.getText(),
-							ibanTextField.getText(),
-							bicTextField.getText(),
-							passwordTextField.getText(),
-							usernameTextField.getText()));
-					
-					JOptionPane.showMessageDialog(null, "Registration Succeed !");
-					new Login().frame.setVisible(true);
-					frame.setVisible(false);
-					
-				} else {
+				if (chekIsNotEmpty()) {
+					if(checkPassword()) {
+						if(vaildIbanAndBic(ibanTextField , bicTextField)) {
+								user.add(new User(firstnameTextField.getText(),
+								lastnameTextField.getText(),
+								ibanTextField.getText(),
+								bicTextField.getText(),
+								passwordTextField.getText(),
+								usernameTextField.getText()));
+						JOptionPane.showMessageDialog(null, "Registration Succeed !");
+						new Login().frame.setVisible(true);
+						frame.setVisible(false);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Not Valid IBAN / BIC \n Please try again!");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Passwor mismatch! \n please try again.." );
+					}
+				}else {
 					JOptionPane.showMessageDialog(null, "Please fill in all Fields!");
 				}
 			}
@@ -188,6 +190,35 @@ public class SignUp {
 		contentPane.add(btnCancel);
 		
 	}
+	
+	 boolean chekIsNotEmpty() {
+		if (!(firstnameTextField.getText().isEmpty())
+				&& !(lastnameTextField.getText().isEmpty())
+				&& !(usernameTextField.getText().isEmpty())
+				&& !(passwordTextField.getText().isEmpty())
+				&& !(confirmPasswordTextField.getText().isEmpty())
+				&&!(ibanTextField.getText().isEmpty())
+				&& !(bicTextField.getText().isEmpty())) {
+			return true;
+			
+		}
+		return false;
+	}
+	 
+	 boolean checkPassword() {
+		 if (passwordTextField.getText().contentEquals(confirmPasswordTextField.getText()))
+			 return true;
+		 return false;
+	 }
+	 
+	 boolean vaildIbanAndBic(JTextField iban , JTextField bic) {
+		 for (User element : Bank.user) {
+			if(element.getiBan().contentEquals(iban.getText())
+					&& element.getBic().contentEquals(bic.getText()))
+				return true;
+		}
+		return false; 
+	 }
 
 }
 
