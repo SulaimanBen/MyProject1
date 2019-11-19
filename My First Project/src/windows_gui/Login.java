@@ -5,10 +5,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import client.Bank;
 import client.User;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,27 +23,11 @@ import javax.swing.JPasswordField;
 
 public class Login {
 
-	JFrame frame;
+	public JFrame frame;
 	private JPanel contentPane;
 //	private JTextField textField;
 	private JTextField usernametextField;
 	private JPasswordField passwordTextField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -84,20 +68,22 @@ public class Login {
 		
 		JButton btnlogin = new JButton("Login");
 		btnlogin.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				for (User element : SignUp.user) {
 					if (element.getUserName().contentEquals(usernametextField.getText()) 
 							&& element.getPassword().contentEquals(passwordTextField.getText())) {
 						WelcomeWindow w = new WelcomeWindow();
-						Operation op = new Operation();
+						
 						w.frame.setVisible(true);
 						w.lblwelcomeUsername.setText(element.getUserName());
-						op.lblBalance.setText(""+element.getBalance());
+						String amountAsString = getAmountAsString(element.getIban());
+						new Operation().lblBalance.setText(amountAsString);
 						frame.setVisible(false);
 						break;
 					}else {
-						JOptionPane.showMessageDialog(null, "Wrong Username or Password!\n Please try again..");;
+						JOptionPane.showMessageDialog(null, "Wrong Username or Password!\n Please try again..");
 					}
 				}
 			}
@@ -154,6 +140,17 @@ public class Login {
 		lblNewLabel.setBounds(651, 10, 37, 29);
 		contentPane.add(lblNewLabel);
 		frame.setUndecorated(true);
+	}
+	
+	String getAmountAsString(String iban) {
+		String amountAsString;
+		for (User element : Bank.getList()) {
+			if(iban == element.getIban()) {
+				amountAsString = Double.toString(element.getAmount());
+				return amountAsString;
+			}	
+		}
+		return null;
 	}
 }
 

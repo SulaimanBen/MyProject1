@@ -42,6 +42,7 @@ public class Operation {
 		frame.getContentPane().add(lblBalance);
 		
 		
+		
 		JButton btnSignOut = new JButton("Sign out");
 		btnSignOut.addMouseListener(new MouseAdapter() {
 			@Override

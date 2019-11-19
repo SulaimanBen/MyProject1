@@ -3,6 +3,7 @@ package windows_gui;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;

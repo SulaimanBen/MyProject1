@@ -1,33 +1,56 @@
 package client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bank {
 	
-	private String bankName;
-	private int id;
-	public static User[] user = {new User("Max", "", "DE12515140", "CODEXXXXX" , 50000),
-						new User("Tom", "", "DE14788963", "CODEXXXXX", 1000000)	};
+	private String bic;
+	private static List<User> userList = new ArrayList<>();
 	
-	public String getBankName() {
-		return bankName;
+	public Bank( String bic) {
+		this.bic = bic;
 	}
 
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
+	public void addUser(String firstName, String lastName, String iban , double amount) {
+		userList.add(new User(firstName , lastName , iban , bic , amount));
 	}
 
-	public int getId() {
-		return id;
+	public static List<User> getList() {
+		
+		return userList;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	
+	 void printUser() {
+		System.out.println(userList);
 	}
-
-	public Bank(String bankName, int id,User[] user) {
-		this.bankName = bankName;
-		this.id = id;
-		Bank.user = user;
-	}
+	
+//	private String bankName , bic;
+//	private int id;
+//	public static User[] user = {new User("Ben", "Sulaiman", "DE12515140", "CODEXXXXX" , 50000),
+//						new User("Max", "Mustermann", "DE14788963", "CODEXXXXX", 1000000)	};
+//	
+//	public String getBankName() {
+//		return bankName;
+//	}
+//
+//	public void setBankName(String bankName) {
+//		this.bankName = bankName;
+//	}
+//
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
+//
+//	public Bank(String bankName, int id,User[] user) {
+//		this.bankName = bankName;
+//		this.id = id;
+//		Bank.user = user;
+//	}
 	
 
 }

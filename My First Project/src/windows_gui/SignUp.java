@@ -25,8 +25,6 @@ public class SignUp {
 
 	protected JFrame frame;
 	private JPanel contentPane; 
-	private JTextField firstnameTextField;
-	private JTextField lastnameTextField;
 	private JTextField usernameTextField;
 	private JTextField emailTextField;
 	private JTextField ibanTextField;
@@ -65,98 +63,78 @@ public class SignUp {
 		lblSignup.setBounds(149, 23, 351, 60);
 		contentPane.add(lblSignup);
 		
-		JLabel lblNewLabel = new JLabel("First name:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(89, 134, 107, 33);
-		contentPane.add(lblNewLabel);
-		
-		firstnameTextField = new JTextField();
-		firstnameTextField.setBounds(296, 138, 194, 33);
-		contentPane.add(firstnameTextField);
-		firstnameTextField.setColumns(10);
-		
-		JLabel lblLastName = new JLabel("Last name:");
-		lblLastName.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblLastName.setBounds(89, 177, 107, 33);
-		contentPane.add(lblLastName);
-		
-		lastnameTextField = new JTextField();
-		lastnameTextField.setColumns(10);
-		lastnameTextField.setBounds(296, 177, 194, 33);
-		contentPane.add(lastnameTextField);
-		
 		JLabel lblEmail = new JLabel("Email:(Optional)");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEmail.setBounds(89, 285, 155, 33);
+		lblEmail.setBounds(113, 206, 155, 33);
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPassword.setBounds(89, 343, 107, 33);
+		lblPassword.setBounds(113, 264, 107, 33);
 		contentPane.add(lblPassword);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password:");
 		lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblConfirmPassword.setBounds(89, 386, 167, 33);
+		lblConfirmPassword.setBounds(113, 307, 167, 33);
 		contentPane.add(lblConfirmPassword);
 		
 		JLabel lblIban = new JLabel("IBAN:");
 		lblIban.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblIban.setBounds(89, 459, 107, 33);
+		lblIban.setBounds(113, 380, 107, 33);
 		contentPane.add(lblIban);
 		
 		JLabel lblBic = new JLabel("BIC:");
 		lblBic.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblBic.setBounds(89, 502, 107, 33);
+		lblBic.setBounds(113, 423, 107, 33);
 		contentPane.add(lblBic);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setColumns(10);
-		usernameTextField.setBounds(296, 220, 194, 33);
+		usernameTextField.setBounds(320, 141, 194, 33);
 		contentPane.add(usernameTextField);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblUsername.setBounds(89, 220, 107, 33);
+		lblUsername.setBounds(113, 137, 107, 33);
 		contentPane.add(lblUsername);
 		
 		emailTextField = new JTextField();
 		emailTextField.setColumns(10);
-		emailTextField.setBounds(296, 285, 194, 33);
+		emailTextField.setBounds(320, 206, 194, 33);
 		contentPane.add(emailTextField);
 		
 		ibanTextField = new JTextField();
 		ibanTextField.setColumns(10);
-		ibanTextField.setBounds(296, 460, 194, 33);
+		ibanTextField.setBounds(320, 381, 194, 33);
 		contentPane.add(ibanTextField);
 		
 		bicTextField = new JTextField();
 		bicTextField.setColumns(10);
-		bicTextField.setBounds(296, 502, 194, 33);
+		bicTextField.setBounds(320, 423, 194, 33);
 		contentPane.add(bicTextField);
 		
 		passwordTextField = new JPasswordField();
-		passwordTextField.setBounds(296, 343, 194, 33);
+		passwordTextField.setBounds(320, 264, 194, 33);
 		contentPane.add(passwordTextField);
 		
 		confirmPasswordTextField = new JPasswordField();
 		confirmPasswordTextField.setToolTipText("");
-		confirmPasswordTextField.setBounds(296, 386, 194, 33);
+		confirmPasswordTextField.setBounds(320, 307, 194, 33);
 		contentPane.add(confirmPasswordTextField);
 		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (chekIsNotEmpty()) {
 					if(checkPassword()) {
 						if(vaildIbanAndBic(ibanTextField , bicTextField)) {
-								user.add(new User(firstnameTextField.getText(),
-								lastnameTextField.getText(),
+								user.add(new User(usernameTextField.getText(),
 								ibanTextField.getText(),
 								bicTextField.getText(),
-								passwordTextField.getText(),
-								usernameTextField.getText()));
+								passwordTextField.getText()
+								));
 						JOptionPane.showMessageDialog(null, "Registration Succeed !");
 						new Login().frame.setVisible(true);
 						frame.setVisible(false);
@@ -166,7 +144,7 @@ public class SignUp {
 						}
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Passwor mismatch! \n please try again.." );
+						JOptionPane.showMessageDialog(null, "Password mismatch! \n please try again.." );
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "Please fill in all Fields!");
@@ -191,10 +169,9 @@ public class SignUp {
 		
 	}
 	
-	 boolean chekIsNotEmpty() {
-		if (!(firstnameTextField.getText().isEmpty())
-				&& !(lastnameTextField.getText().isEmpty())
-				&& !(usernameTextField.getText().isEmpty())
+	 @SuppressWarnings("deprecation")
+	boolean chekIsNotEmpty() {
+		if ( !(usernameTextField.getText().isEmpty())
 				&& !(passwordTextField.getText().isEmpty())
 				&& !(confirmPasswordTextField.getText().isEmpty())
 				&&!(ibanTextField.getText().isEmpty())
@@ -205,15 +182,16 @@ public class SignUp {
 		return false;
 	}
 	 
-	 boolean checkPassword() {
+	 @SuppressWarnings("deprecation")
+	boolean checkPassword() {
 		 if (passwordTextField.getText().contentEquals(confirmPasswordTextField.getText()))
 			 return true;
 		 return false;
 	 }
 	 
 	 boolean vaildIbanAndBic(JTextField iban , JTextField bic) {
-		 for (User element : Bank.user) {
-			if(element.getiBan().contentEquals(iban.getText())
+		 for (User element : Bank.getList()) {
+			if(element.getIban().contentEquals(iban.getText())
 					&& element.getBic().contentEquals(bic.getText()))
 				return true;
 		}
