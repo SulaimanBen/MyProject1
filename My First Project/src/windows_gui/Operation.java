@@ -30,15 +30,15 @@ public class Operation {
 		frame.getContentPane().setBackground(new Color(100, 149, 237));
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Welcome Your Balance is :");
+		JLabel lblNewLabel = new JLabel("Welcome Your Balance :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(22, 11, 212, 70);
+		lblNewLabel.setBounds(22, 11, 194, 70);
 		frame.getContentPane().add(lblNewLabel);
 		
 		lblBalance = new JLabel("");
 		lblBalance.setToolTipText("");
 		lblBalance.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBalance.setBounds(235, 23, 238, 39);
+		lblBalance.setBounds(217, 28, 238, 39);
 		frame.getContentPane().add(lblBalance);
 		
 		

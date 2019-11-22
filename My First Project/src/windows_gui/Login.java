@@ -19,13 +19,14 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+
 import javax.swing.JPasswordField;
 
 public class Login {
 
 	public JFrame frame;
 	private JPanel contentPane;
-//	private JTextField textField;
 	private JTextField usernametextField;
 	private JPasswordField passwordTextField;
 
@@ -78,7 +79,14 @@ public class Login {
 						
 						w.frame.setVisible(true);
 						w.lblwelcomeUsername.setText(element.getUserName());
-						String amountAsString = getAmountAsString(element.getIban());
+						
+						String amountAsString="";
+						for (User user : Bank.getList()) {
+							if(element.getIban() != null) {
+								amountAsString = Double.toString(user.getAmount());
+								System.out.println(amountAsString);
+							}
+						}	
 						new Operation().lblBalance.setText(amountAsString);
 						frame.setVisible(false);
 						break;

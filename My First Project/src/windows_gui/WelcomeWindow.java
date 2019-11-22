@@ -50,6 +50,7 @@ public class WelcomeWindow {
 			public void mouseClicked(MouseEvent e) {
 				new Operation().frame.setVisible(true);
 				frame.setVisible(false);
+				
 			}
 		});
 		lblSkip.setFont(new Font("Tahoma", Font.PLAIN, 18));
