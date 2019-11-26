@@ -33,6 +33,8 @@ public class SignUp {
 	private JPasswordField confirmPasswordTextField;
 	
 	protected static List<User> user = new ArrayList<>();
+	
+	double tempAmount;
 
 
 	/**
@@ -130,10 +132,11 @@ public class SignUp {
 				if (chekIsNotEmpty()) {
 					if(checkPassword()) {
 						if(vaildIbanAndBic(ibanTextField , bicTextField)) {
-								user.add(new User(usernameTextField.getText(),
+								User.user.add(new User(usernameTextField.getText(),
 								ibanTextField.getText(),
 								bicTextField.getText(),
-								passwordTextField.getText()
+								passwordTextField.getText(),
+								tempAmount
 								));
 						JOptionPane.showMessageDialog(null, "Registration Succeed !");
 						new Login().frame.setVisible(true);
@@ -192,7 +195,9 @@ public class SignUp {
 	 boolean vaildIbanAndBic(JTextField iban , JTextField bic) {
 		 for (User element : Bank.getList()) {
 			if(element.getIban().contentEquals(iban.getText())
-					&& element.getBic().contentEquals(bic.getText()))
+					&& element.getBic().contentEquals(bic.getText())) {
+					tempAmount = element.getAmount();
+			}
 				return true;
 		}
 		return false; 

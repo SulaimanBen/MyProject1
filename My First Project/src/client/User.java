@@ -1,11 +1,16 @@
 package client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	
 	private String firstName , lastName , iban , bic , userName , password;
 	private double amount;
 	
-	public User(String firstName, String lastName, String iban, String bic , double amount) {
+	public static List<User> user = new ArrayList<>();
+
+	public User(int id, String firstName, String lastName, String iban, String bic , double amount) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.iban = iban;
@@ -13,10 +18,11 @@ public class User {
 		this.amount = amount;
 	}
 
-	public User(String userName, String iban , String bic , String password) {
+	public User(String userName, String iban , String bic , String password , double amount) {
 		this.userName = userName;
 		this.password = password ; 
 		this.userName = userName;
+		this.amount = amount;
 	}
 
 	public double getAmount() {

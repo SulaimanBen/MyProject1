@@ -72,22 +72,15 @@ public class Login {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				for (User element : SignUp.user) {
+				for (User element : User.user) {
 					if (element.getUserName().contentEquals(usernametextField.getText()) 
 							&& element.getPassword().contentEquals(passwordTextField.getText())) {
 						WelcomeWindow w = new WelcomeWindow();
 						
 						w.frame.setVisible(true);
 						w.lblwelcomeUsername.setText(element.getUserName());
-						
-						String amountAsString="";
-						for (User user : Bank.getList()) {
-							if(element.getIban() != null) {
-								amountAsString = Double.toString(user.getAmount());
-								System.out.println(amountAsString);
-							}
-						}	
-						new Operation().lblBalance.setText(amountAsString);
+						System.out.println(element.getAmount());	
+//						new Operation().lblBalance.setText();
 						frame.setVisible(false);
 						break;
 					}else {

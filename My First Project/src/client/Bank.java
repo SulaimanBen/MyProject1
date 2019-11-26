@@ -12,8 +12,8 @@ public class Bank {
 		this.bic = bic;
 	}
 
-	public void addUser(String firstName, String lastName, String iban , double amount) {
-		userList.add(new User(firstName , lastName , iban , bic , amount));
+	public void addUser(int id ,String firstName, String lastName, String iban , double amount) {
+		userList.add(new User(id,firstName , lastName , iban , bic , amount));
 	}
 
 	public static List<User> getList() {
